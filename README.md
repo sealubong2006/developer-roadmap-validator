@@ -26,6 +26,9 @@ A production-grade full-stack learning tool that validates beginner developers' 
 - **APIs**: GitHub API, Stack Exchange API
 - **Storage**: LocalStorage (client-side only)
 
+##DEMO
+https://github.com/user-attachments/assets/080ab99f-aafa-43e7-81d7-cd8fc2ca3be6
+
 ### Project Structure
 ```
 developer-roadmap-validator/
