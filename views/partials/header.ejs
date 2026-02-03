@@ -1,0 +1,64 @@
+<header class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/">
+            <span class="brand-icon">🗺️</span>
+            Developer Roadmap Validator
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link" id="resetBtn" title="Reset all data">
+                        Reset
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                        Settings
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">API Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="githubTokenInput" class="form-label">GitHub Personal Access Token (Optional)</label>
+                    <input type="password" class="form-control" id="githubTokenInput" 
+                           placeholder="ghp_...">
+                    <div class="form-text">
+                        Increases rate limit to 5,000 requests/hour. 
+                        <a href="https://github.com/settings/tokens" target="_blank">Get token</a>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="soKeyInput" class="form-label">Stack Overflow API Key (Optional)</label>
+                    <input type="password" class="form-control" id="soKeyInput" 
+                           placeholder="Your SO key">
+                    <div class="form-text">
+                        Increases rate limit to 10,000 requests/day.
+                        <a href="https://stackapps.com/apps/oauth/register" target="_blank">Get key</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveSettingsBtn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

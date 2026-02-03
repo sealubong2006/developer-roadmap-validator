@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    
+    <main class="container py-5">
+        <!-- Hero Section -->
+        <div class="hero-section text-center mb-5">
+            <h1 class="display-3 fw-bold mb-3 hero-title">Validate Your Skills</h1>
+            <p class="lead text-muted">Compare your development skills against curated roadmaps with live demand data</p>
+        </div>
+
+        <!-- Main Form -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg border-0 main-card">
+                    <div class="card-body p-4">
+                        
+                        <!-- Track Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Select Your Track</label>
+                            <div class="btn-group w-100 track-selector" role="group">
+                                <input type="radio" class="btn-check" name="track" id="trackFrontend" value="frontend" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="trackFrontend">
+                                    <span class="track-icon">🎨</span> Frontend
+                                </label>
+
+                                <input type="radio" class="btn-check" name="track" id="trackBackend" value="backend" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="trackBackend">
+                                    <span class="track-icon">⚙️</span> Backend
+                                </label>
+
+                                <input type="radio" class="btn-check" name="track" id="trackFullstack" value="fullstack" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="trackFullstack">
+                                    <span class="track-icon">🚀</span> Full Stack
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Skills Input Section -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Your Skills</label>
+                            <div class="skill-input-group">
+                                <div class="row mb-3">
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="skillInput" 
+                                               list="skillSuggestions" placeholder="Start typing a skill...">
+                                        <datalist id="skillSuggestions">
+                                            <% allSkills.forEach(skill => { %>
+                                                <option value="<%= skill %>">
+                                            <% }); %>
+                                        </datalist>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" id="proficiencySelect">
+                                            <option value="beginner">Beginner</option>
+                                            <option value="intermediate" selected>Intermediate</option>
+                                            <option value="strong">Strong</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary w-100" id="addSkillBtn">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected Skills Display -->
+                            <div id="selectedSkills" class="selected-skills-container mb-3">
+                                <!-- Skills will be added here dynamically -->
+                            </div>
+
+                            <div class="text-muted small">
+                                <span id="skillCount">0</span> skills added
+                            </div>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Sort Results By</label>
+                            <select class="form-select" id="sortBy">
+                                <option value="impact" selected>Impact (Default)</option>
+                                <option value="demand">Demand</option>
+                                <option value="learning_order">Learning Order</option>
+                                <option value="quick_wins">Quick Wins</option>
+                            </select>
+                        </div>
+
+                        <!-- Validate Button -->
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-lg btn-primary" id="validateBtn" disabled>
+                                <span class="btn-text">Validate Skills</span>
+                                <span class="btn-spinner spinner-border spinner-border-sm d-none" role="status"></span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="row justify-content-center mt-5 d-none">
+            <div class="col-lg-10">
+                
+                <!-- Summary Cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <div class="stat-value" id="coveragePercent">0%</div>
+                                <div class="stat-label">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <div class="stat-value" id="totalGaps">0</div>
+                                <div class="stat-label">Skill Gaps</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <div class="stat-value" id="userSkillsCount">0</div>
+                                <div class="stat-label">Your Skills</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <div class="stat-value" id="coreSkillsCount">0</div>
+                                <div class="stat-label">Core Skills</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs for Results -->
+                <ul class="nav nav-tabs mb-3" id="resultsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="gaps-tab" data-bs-toggle="tab" 
+                                data-bs-target="#gaps" type="button">
+                            Skill Gaps
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="learning-tab" data-bs-toggle="tab" 
+                                data-bs-target="#learning" type="button">
+                            Learning Path
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="charts-tab" data-bs-toggle="tab" 
+                                data-bs-target="#charts" type="button">
+                            Charts
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="resultsTabContent">
+                    
+                    <!-- Gaps Tab -->
+                    <div class="tab-pane fade show active" id="gaps" role="tabpanel">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <div id="gapsContent">
+                                    <!-- Gaps will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Path Tab -->
+                    <div class="tab-pane fade" id="learning" role="tabpanel">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <div id="learningContent">
+                                    <!-- Learning path will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Tab -->
+                    <div class="tab-pane fade" id="charts" role="tabpanel">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <div id="chartsContent">
+                                    <!-- Charts will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Button -->
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-success btn-lg" id="exportPdfBtn">
+                        <span>📄 Export PDF Report</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Pass server data to client
+        window.APP_DATA = {
+            allSkills: <%- JSON.stringify(allSkills) %>,
+            tracks: <%- JSON.stringify(tracks) %>,
+            proficiencyLevels: <%- JSON.stringify(proficiencyLevels) %>
+        };
+    </script>
+    <script src="/js/storage.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/skills.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

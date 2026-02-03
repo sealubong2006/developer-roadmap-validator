@@ -1,0 +1,29 @@
+<footer class="footer mt-auto py-4 bg-light">
+    <div class="container text-center">
+        <p class="text-muted mb-1">
+            Developer Roadmap Validator v1.0
+        </p>
+        <p class="text-muted small mb-0">
+            Based on <a href="https://roadmap.sh" target="_blank">roadmap.sh</a> community roadmaps
+        </p>
+    </div>
+</footer>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3 text-white">Fetching demand data...</p>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastNotification" class="toast" role="alert">
+        <div class="toast-header">
+            <strong class="me-auto">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+</div>
