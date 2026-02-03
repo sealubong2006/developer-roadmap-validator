@@ -222,9 +222,7 @@ All charts include:
 - ARIA labels
 
 **Chart Types**:
-1. **Demand Trends**: Monthly GitHub + SO data over 6 months
-2. **Impact Ranking**: Horizontal bar chart of gaps
-3. **Track Comparison**: Radar/spider chart (Full Stack only)
+under development contribution is welcomed
 
 ### PDF Export
 Server-generated PDF includes:
